@@ -1,15 +1,35 @@
 // switch3
 // Make me compile!
 
-// I AM NOT DONE
 package main_test
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
-func weekDay(day int) string {
+func weekDay(day int) (string, error) {
 	// Return the day of the week based on the
 	// integer. Use a switch case to satisfy all test cases below
-	return "Sunday"
+	switch {
+	case day == 0:
+		return "Sunday", nil
+	case day == 1:
+		return "Monday", nil
+	case day == 2:
+		return "Tuesday", nil
+	case day == 3:
+		return "Wednesday", nil
+	case day == 4:
+		return "Thursday", nil
+	case day == 5:
+		return "Friday", nil
+	case day == 6:
+		return "Saturday", nil
+	case day == 7:
+		return "Sunday", nil
+	}
+	return "", errors.New("day was greater than 6; limits of the days of the week")
 }
 
 func TestWeekDay(t *testing.T) {
@@ -27,7 +47,10 @@ func TestWeekDay(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		day := weekDay(tc.input)
+		day, err := weekDay(tc.input)
+		if err != nil {
+			t.Errorf("Got a too high/low integer")
+		}
 		if day != tc.want {
 			t.Errorf("expected %s but got %s", tc.want, day)
 		}

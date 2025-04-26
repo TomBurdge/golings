@@ -1,7 +1,6 @@
 // anonymous functions3
 // Make me compile!
 
-// I AM NOT DONE
 package main
 
 import "fmt"
@@ -16,7 +15,7 @@ func updateStatus() func() string {
 
 	return func() string {
 		index++
-		return "What should I return?"
+		return orderStatus[index]
 	}
 }
 
@@ -26,10 +25,12 @@ func main() {
 
 	status = anonymous_func()
 	status = anonymous_func()
+	status = anonymous_func()
 
 	if status == "DONE" {
 		fmt.Println("Good Job!")
 	} else {
+		fmt.Println(status)
 		panic("To complete the challenge the status must be DONE")
 	}
 }
